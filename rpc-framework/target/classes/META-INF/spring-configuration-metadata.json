@@ -1,0 +1,27 @@
+{
+  "groups": [
+    {
+      "name": "rpc",
+      "type": "com.li.spring.config.RpcProperties",
+      "sourceType": "com.li.spring.config.RpcProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "rpc.provider-name",
+      "type": "java.lang.String",
+      "sourceType": "com.li.spring.config.RpcProperties"
+    },
+    {
+      "name": "rpc.registry-address",
+      "type": "java.lang.String",
+      "sourceType": "com.li.spring.config.RpcProperties"
+    },
+    {
+      "name": "rpc.server-port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.li.spring.config.RpcProperties"
+    }
+  ],
+  "hints": []
+}

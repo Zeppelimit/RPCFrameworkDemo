@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="rpc-provider0" />
+        <module name="rpc-common" />
+        <module name="rpc-consumer" />
+        <module name="rpc-framework" />
+        <module name="rpc-provider1" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="rpc-config" target="1.8" />
+      <module name="rpc-pervider1" target="1.8" />
+      <module name="rpc-protocol" target="1.8" />
+      <module name="rpc-provider2" target="1.8" />
+      <module name="rpc-proxy" target="1.8" />
+      <module name="rpc-registry" target="1.8" />
+      <module name="rpc-serialize" target="1.8" />
+      <module name="rpc-transport" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
