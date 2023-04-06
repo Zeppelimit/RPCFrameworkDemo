@@ -8,6 +8,11 @@
   ],
   "properties": [
     {
+      "name": "rpc.blocking-queue-length",
+      "type": "java.lang.Integer",
+      "sourceType": "com.li.spring.config.RpcProperties"
+    },
+    {
       "name": "rpc.provider-name",
       "type": "java.lang.String",
       "sourceType": "com.li.spring.config.RpcProperties"
@@ -19,6 +24,11 @@
     },
     {
       "name": "rpc.server-port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.li.spring.config.RpcProperties"
+    },
+    {
+      "name": "rpc.thread-pool-num",
       "type": "java.lang.Integer",
       "sourceType": "com.li.spring.config.RpcProperties"
     }

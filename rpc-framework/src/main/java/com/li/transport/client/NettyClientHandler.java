@@ -6,8 +6,7 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
-import com.li.serialize.struct.RpcHeader;
-import com.li.serialize.struct.RpcMessage;
+import com.li.transport.client.struct.RpcMessage;
 
 @Slf4j
 @ChannelHandler.Sharable

@@ -35,7 +35,7 @@ public class RegistryProtocol extends AbstractProtocol {
 
         registryDirectory.subscribe(url);
 
-        return new MockClusterInvoker<>(registryDirectory, new FailoverClusterInvoker<>(registryDirectory));
+        return new MockClusterInvoker<>(registryDirectory, new FailfastClusterInvoker<>(registryDirectory));
 //        return new FailoverClusterInvoker<>(registryDirectory);
     }
 

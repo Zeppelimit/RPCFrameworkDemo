@@ -1,6 +1,7 @@
 package com.li.rpc;
 
 import io.netty.util.concurrent.DefaultPromise;
+import io.protostuff.Tag;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -8,9 +9,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class AppRpcResult implements RpcResult{
-
+    @Tag(1)
     private Object result;
-
+    @Tag(2)
     private Throwable exception;
 
 

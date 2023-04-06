@@ -4,13 +4,12 @@ import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleStateEvent;
 import lombok.extern.slf4j.Slf4j;
-import com.li.serialize.struct.RpcHeader;
-import com.li.serialize.struct.RpcMessage;
+import com.li.transport.client.struct.RpcHeader;
+import com.li.transport.client.struct.RpcMessage;
 import com.li.serialize.DataType;
 
 @Slf4j
-public class     HeartBeatRespHandler extends ChannelDuplexHandler {
-
+public class HeartBeatRespHandler extends ChannelDuplexHandler {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if(msg instanceof RpcMessage){

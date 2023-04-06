@@ -60,7 +60,7 @@ public abstract class AbstractClusterInvoker<T> implements ClusterInvoker<T>{
     }
 
     private LoadBalance initLoadBalance(List<Invoker<T>> invokers, RpcInvocation invocation) {
-        return new RoundRobinLoadBalance();
+        return new RandomLoadBalance();
     }
 
     protected Invoker<T> select(LoadBalance loadbalance, RpcInvocation invocation,

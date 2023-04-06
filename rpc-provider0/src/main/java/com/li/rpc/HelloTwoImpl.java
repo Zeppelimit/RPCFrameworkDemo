@@ -7,7 +7,6 @@ import com.li.spring.annotation.RpcService;
 public class HelloTwoImpl implements HelloTwo {
     @Override
     public String sayHello(String str) {
-        int a = 1/0;
         return "hello," + str;
     }
 }

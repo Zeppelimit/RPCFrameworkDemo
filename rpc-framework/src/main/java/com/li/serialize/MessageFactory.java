@@ -1,7 +1,7 @@
 package com.li.serialize;
 
-import com.li.serialize.struct.RpcHeader;
-import com.li.serialize.struct.RpcMessage;
+import com.li.transport.client.struct.RpcHeader;
+import com.li.transport.client.struct.RpcMessage;
 import com.li.transport.DefaultRequest;
 import com.li.transport.DefaultResponse;
 
@@ -14,7 +14,7 @@ public class MessageFactory {
         rpcHeader.setId(id);
         rpcHeader.setStatus((byte) ResponseStatus.OK.getValue());
         rpcHeader.setIsEvent((byte) 1);
-        rpcHeader.setSerializeMethod((byte) SerializerMethod.Json.getValue());
+        rpcHeader.setSerializeMethod((byte) SerializerMethod.Kryo.getValue());
         rpcMessage.setRpcHeader(rpcHeader);
         rpcMessage.setData(response);
         return rpcMessage;
@@ -27,7 +27,7 @@ public class MessageFactory {
         rpcHeader.setId(request.getId());
         rpcHeader.setStatus((byte) 0);
         rpcHeader.setIsEvent((byte) 1);
-        rpcHeader.setSerializeMethod((byte)SerializerMethod.Json.getValue());
+        rpcHeader.setSerializeMethod((byte)SerializerMethod.Kryo.getValue());
         rpcMessage.setRpcHeader(rpcHeader);
         rpcMessage.setData(request);
         return rpcMessage;

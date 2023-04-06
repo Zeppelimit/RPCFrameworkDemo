@@ -1,22 +1,26 @@
 package com.li.rpc.invoker;
 
+import io.protostuff.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.lang.reflect.Method;
 
 @Data
+@NoArgsConstructor
 public class RpcInvocation {
+    @Tag(1)
     private String interfaceName;
-
+    @Tag(2)
     private String methodName;
-
+    @Tag(3)
     private String version;
-
+    @Tag(4)
     private String group;
-
+    @Tag(5)
     private Class<?>[] parameterType;
-
+    @Tag(6)
     private Object[] args;
 
     public RpcInvocation(String interfaceName, String version, String group) {

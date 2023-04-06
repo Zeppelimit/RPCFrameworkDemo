@@ -28,7 +28,6 @@ public class NettyServer {
 
     private boolean stated;
 
-    private final EventExecutorGroup taskGroup =new DefaultEventExecutorGroup(2);
 
     public NettyServer() {
         boss = new NioEventLoopGroup(1);
@@ -40,11 +39,11 @@ public class NettyServer {
 
         try {
             serverBootstrap.group(boss, worker)
-                    .option(ChannelOption.SO_BACKLOG, 1024)	//设置TCP缓冲区
-                    .option(ChannelOption.SO_RCVBUF, 32*1024) // 设置接受数据的缓存大小
+                    .option(ChannelOption.SO_BACKLOG, 2*1024)	//设置TCP缓冲区
+                    .option(ChannelOption.SO_RCVBUF, 64*1024) // 设置接受数据的缓存大小
                     .channel(NioServerSocketChannel.class)
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
-                    .childOption(ChannelOption.SO_SNDBUF, 32*1024) // 设置发送数据的缓存大小
+                    .childOption(ChannelOption.SO_SNDBUF, 64*1024) // 设置发送数据的缓存大小
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
@@ -53,7 +52,7 @@ public class NettyServer {
                                     .addLast(new RpcEncoder())
                                     .addLast(new IdleStateHandler(0,0,200))
                                     .addLast(new HeartBeatRespHandler())
-                                    .addLast(taskGroup, new NettyServerHandler());
+                                    .addLast(new NettyServerHandler());
                         }
                     });
 

@@ -9,13 +9,13 @@ import com.li.transport.DefaultResponse;
 
 import java.util.List;
 @Slf4j
+@Deprecated
 public class DefaultCodec extends ByteToMessageCodec {
 
     private final int MAGIC = 0xCAFE; // 魔数
 
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, Object o, ByteBuf byteBuf) throws Exception {
-        log.info("进行编码");
         byte requestType;
         if(o instanceof DefaultRequest){
             requestType = (byte) MessageType.MESSAGE_REQUEST.getValue();
@@ -35,14 +35,11 @@ public class DefaultCodec extends ByteToMessageCodec {
         byteBuf.writeInt(serialize.length);
         byteBuf.writeBytes(serialize);
 
-        log.info("编码完成");
-
     }
 
     @Override
 
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List list) throws Exception {
-        log.info("进行解码");
         int magic = byteBuf.readInt();
 
         if(magic != MAGIC){
@@ -76,7 +73,6 @@ public class DefaultCodec extends ByteToMessageCodec {
         }else{
             throw new UnsupportedOperationException("requestType unknown:" + requestType);
         }
-        log.info("解码完成");
     }
 
 }

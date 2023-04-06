@@ -2,6 +2,7 @@ package com.li.serialize;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
+import com.li.common.ProtostuffUtils;
 import com.li.rpc.AppRpcResult;
 import com.li.transport.DefaultRequest;
 import com.li.transport.DefaultResponse;
@@ -36,8 +37,19 @@ public interface Serializer {
                 String json = gson.toJson(object);
                 return json.getBytes(StandardCharsets.UTF_8);
             }
-        }
+        },
 
+        Protostuff{
+            @Override
+            public <T> T deserialize(Class<T> clazz, byte[] bytes) {
+                return ProtostuffUtils.deserialize(bytes, clazz);
+            }
+
+            @Override
+            public <T> byte[] serialize(T object) {
+                return ProtostuffUtils.serialize(object);
+            }
+        }
 
     }
 

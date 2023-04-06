@@ -12,6 +12,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import com.li.serialize.*;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -19,7 +20,8 @@ import java.util.concurrent.ScheduledExecutorService;
 
 @Slf4j
 @Data
-public class NettyClient {
+@Deprecated
+public class NettyClient{
 
     private String ipAndPort;
     /**
@@ -60,10 +62,11 @@ public class NettyClient {
                         // 注意pipeline的顺序
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
+                            IdleStateHandler idleStateHandler = new IdleStateHandler(60, 0, 0);
                             ch.pipeline().addLast(new RpcDecoder(1024*1024*5,16,4))
                                     .addLast(new RpcEncoder())
-                                    .addLast(new IdleStateHandler(60,0,0))
-                                    .addLast(new HeartBeatReqHandler(NettyClient.this))
+                                    .addLast(idleStateHandler)
+                                    .addLast(new HeartBeatReqHandler(NettyClient.this, idleStateHandler))
                                     .addLast(clientHandler);
                         }
                     });
@@ -123,5 +126,6 @@ public class NettyClient {
 
         return nettyClient;
     }
+
 
 }

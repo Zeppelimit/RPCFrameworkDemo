@@ -2,7 +2,7 @@ package com.li.transport;
 
 import io.netty.util.concurrent.DefaultPromise;
 import lombok.extern.slf4j.Slf4j;
-import com.li.serialize.struct.RpcMessage;
+import com.li.transport.client.struct.RpcMessage;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import com.li.registry.ZookeeperClient;
 import com.li.rpc.invoker.RpcInvocation;
 import com.li.serialize.MessageFactory;
-import com.li.serialize.struct.RpcMessage;
+import com.li.transport.client.struct.RpcMessage;
 import com.li.spring.config.RpcProperties;
 import com.li.transport.DefaultRequest;
 import com.li.transport.DefaultResponse;
@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.concurrent.*;
 
 @Slf4j
+@Deprecated
 public class ReferenceProxy implements InvocationHandler{
 
     Class<?> interfaceClass;

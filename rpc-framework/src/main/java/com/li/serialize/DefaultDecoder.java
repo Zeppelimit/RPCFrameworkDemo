@@ -9,10 +9,10 @@ import com.li.transport.DefaultResponse;
 
 import java.util.List;
 @Slf4j
+@Deprecated
 public class DefaultDecoder extends ByteToMessageDecoder {
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
-        log.info("进行解码");
         byte flag = byteBuf.readByte();
         int length = byteBuf.readInt();
         byte[] bytes = new byte[length];

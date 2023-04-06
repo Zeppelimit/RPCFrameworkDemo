@@ -2,6 +2,7 @@ package com.li.spring.listener;
 
 import com.li.spring.ServiceBean;
 import com.li.spring.config.RpcProperties;
+import com.li.transport.client.NewNettyClient;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -63,7 +64,7 @@ public class RpcEventListener implements ApplicationListener<ApplicationContextE
         }
 
         log.info("关闭客户端连接");
-        for(NettyClient nettyClient : NettyClient.nettyClientMap.values()){
+        for(NewNettyClient nettyClient : NewNettyClient.socketChannelMap.values()){
             nettyClient.disconnect();
         }
     }

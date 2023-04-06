@@ -18,4 +18,9 @@ public class RpcProperties {
     private String registryAddress;
 
     private int serverPort = 8083;
+
+    private int threadPoolNum = 10;
+
+    private int blockingQueueLength = 20;
+
 }

@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class RandomLoadBalance extends AbstractLoadBalance{
     @Override
     public <T> Invoker doSelect(List<Invoker<T>> providerList, URL url, RpcInvocation invocation) {
-        Random rand=new Random();
+        Random rand = new Random();
         int len = providerList.size();
         if(len == 1){
             return providerList.get(0);

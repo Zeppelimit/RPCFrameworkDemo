@@ -55,7 +55,7 @@ public class FailoverClusterInvoker<T> extends AbstractClusterInvoker<T>{
                 return result;
             } catch (RuntimeException e) {
                 log.info("重试 ");
-                throw e;
+                System.out.println(e.getMessage());
             } finally {
                 providers.add(invoker.getUrl().getAddress());
             }

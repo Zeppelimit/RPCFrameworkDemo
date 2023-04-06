@@ -88,7 +88,6 @@ public class ReferenceBean <T> implements FactoryBean<T>,
 
         URL url = new URL("registry",address[0],Integer.parseInt(address[1]), interfaceName, group, version);
 
-
         return (Invoker<T>) registryProtocol.refer(interfaceClass, url);
     }
 

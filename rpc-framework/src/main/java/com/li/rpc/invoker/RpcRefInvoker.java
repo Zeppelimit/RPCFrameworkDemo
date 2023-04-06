@@ -2,21 +2,20 @@ package com.li.rpc.invoker;
 
 import com.li.Exception.RpcException;
 import com.li.common.URL;
-import com.li.rpc.PromiseContext;
 import com.li.rpc.RpcResult;
 import com.li.serialize.MessageFactory;
-import com.li.serialize.struct.RpcMessage;
+import com.li.transport.client.struct.RpcMessage;
 import com.li.transport.DefaultRequest;
 import com.li.transport.DefaultResponse;
 import com.li.transport.ResponseCache;
-import com.li.transport.client.NettyClient;
+import com.li.transport.client.ChannelPoolClient;
+import com.li.transport.client.NewNettyClient;
 import io.netty.channel.EventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.util.concurrent.DefaultPromise;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 
 @Slf4j
 public class RpcRefInvoker<T> implements Invoker<T> {
@@ -29,7 +28,9 @@ public class RpcRefInvoker<T> implements Invoker<T> {
 
     private String group;
 
-    private NioEventLoopGroup eventExecutors = new NioEventLoopGroup(5);
+    private NioEventLoopGroup eventExecutors = new NioEventLoopGroup(10);
+
+    private static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 20, 30, TimeUnit.SECONDS,new ArrayBlockingQueue<>(10));
 
     public RpcRefInvoker(URL url, Class<T> serviceInterfaceClass) {
         this.url = url;
@@ -51,7 +52,9 @@ public class RpcRefInvoker<T> implements Invoker<T> {
     @Override
     public RpcResult invoke(RpcInvocation invocation) throws RpcException{
 
-        NettyClient client = NettyClient.getClient(url.getHost() + ":" + url.getPort());
+//        NewNettyClient client = NewNettyClient.getClient(url.getHost() + ":" + url.getPort());
+
+        ChannelPoolClient instance = ChannelPoolClient.getInstance();
 
         DefaultRequest request = new DefaultRequest();
 
@@ -67,10 +70,14 @@ public class RpcRefInvoker<T> implements Invoker<T> {
         RpcMessage rpcMessageResp = null;
         try {
             log.info("发送请求，id : {}", request.getId());
-            client.send(rpcMessage);
+
 
             log.info("等待回复");
             DefaultPromise promise = getPromise(request.getId());
+
+//            sendMsg(client, rpcMessage);
+
+            instance.send(url.getHost() + ":" + url.getPort(),rpcMessage);
 
             rpcMessageResp = (RpcMessage) promise.get(10, TimeUnit.SECONDS);
 
@@ -116,5 +123,15 @@ public class RpcRefInvoker<T> implements Invoker<T> {
         log.info("等待回复");
 
         return promise;
+    }
+
+    public void sendMsg(NewNettyClient newNettyClient, RpcMessage msg){
+        Future<?> future = threadPoolExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                newNettyClient.send(msg);
+
+            }
+        });
     }
 }

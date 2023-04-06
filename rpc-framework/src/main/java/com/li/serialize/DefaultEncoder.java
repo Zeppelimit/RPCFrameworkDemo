@@ -7,10 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import com.li.transport.DefaultRequest;
 
 @Slf4j
+@Deprecated
 public class DefaultEncoder extends MessageToByteEncoder {
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, Object o, ByteBuf byteBuf) throws Exception {
-        log.info("进行编码");
         byte flag = 0;
         if(o instanceof DefaultRequest){
             flag = 0;
